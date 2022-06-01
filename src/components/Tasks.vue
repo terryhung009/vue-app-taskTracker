@@ -1,6 +1,8 @@
 <template>
-    <div :key="task.id" v-for="task in tasks">
-    <Task v-on:delete-task="$emit('delete-task',task.id)" v-bind:task="task" />
+    <div v-bind:key="task.id" v-for="task in tasks">
+    <Task v-on:toggle-reminder="$emit('toggle-reminder',task.id)" 
+    v-on:delete-task="$emit('delete-task',task.id)" 
+    v-bind:task="task" />
     </div>
 </template>
 
@@ -17,7 +19,7 @@
             Task
         },
         emits:[
-            'delete-task'
+            'delete-task','toggle-reminder'
         ],
     }
 </script>

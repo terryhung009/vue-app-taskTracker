@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
-    <Tasks v-on:delete-task="deleteTask" v-bind:tasks="tasks" />
+    <Tasks v-on:toggle-reminder="toggleReminder" v-on:delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
 
 
@@ -34,6 +34,10 @@ export default {
       }
 
     },
+    toggleReminder(id) {
+      // console.log(id)
+      this.tasks= this.tasks.map()
+    }
   },
   created() {
     this.tasks = [

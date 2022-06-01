@@ -1,7 +1,9 @@
 <template>
-<div v-bind:class="[task.reminder ? 'reminder' : '', 'task']">
-    <h3>{{ task.text }}</h3>
-    <i v-on:click="onDelete(task.id)" class="fas fa-times"></i>
+<div v-on:dblclick="$emit('toggle-reminder',task.id)" 
+v-bind:class="[task.reminder ? 'reminder' : '', 'task']">
+    <h3>{{ task.text }}
+    <i v-on:click="$emit('delete-task',task.id)" class="fas fa-times"></i>
+    </h3>
     <p>{{ task.day }}</p>
 </div>
     
@@ -13,12 +15,12 @@ export default{
     props:{
         task:Object
     },
-    methods:{
-        onDelete(id){
-            // console.log(id)
-            this.$emit('delete-task',id)
-        }
-    }
+    // methods:{
+    //     onDelete(id){
+    //         // console.log(id)
+    //         this.$emit('delete-task',id)
+    //     }
+    // }
 
 }
 </script>
