@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
-    <Tasks v-bind:tasks="tasks" />
+    <Tasks v-on:delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
 
 
@@ -25,6 +25,15 @@ export default {
 
       ]
     }
+  },
+  methods: {
+    deleteTask(id) {
+      if (confirm('Are you sure?')) {
+        // console.log('task',id);
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+      }
+
+    },
   },
   created() {
     this.tasks = [
