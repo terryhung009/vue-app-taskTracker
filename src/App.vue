@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <Header title="Task Tracker" />
+    <Header @toggle-add-task="toggleAddTask"  title="Task Tracker" />
+    <div v-show="showAddTask">
+      <AddTask v-on:add-task="addTask" />
+
+    </div>
+    
     <Tasks v-on:toggle-reminder="toggleReminder" v-on:delete-task="deleteTask" v-bind:tasks="tasks" />
   </div>
 
@@ -10,6 +15,7 @@
 <script>
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 
 
 export default {
@@ -17,16 +23,24 @@ export default {
   // inheritAttrs: false,
   components: {
     Header,
-    Tasks
-  },
+    Tasks,
+    AddTask
+},
   data() {
     return {
-      tasks: [
+      tasks: [],
+      showAddTask:false
 
-      ]
+      
     }
   },
   methods: {
+    toggleAddTask(){
+      this.showAddTask = !(this.showAddTask)
+    },
+    addTask(task){
+      this.tasks = [...this.tasks,task]
+    },
     deleteTask(id) {
       if (confirm('Are you sure?')) {
         // console.log('task',id);
@@ -36,7 +50,9 @@ export default {
     },
     toggleReminder(id) {
       // console.log(id)
-      this.tasks= this.tasks.map()
+      this.tasks= this.tasks.map((task)=>task.id === id ? {...task, reminder: !task.reminder}
+      : task
+      )
     }
   },
   created() {
